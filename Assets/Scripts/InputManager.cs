@@ -1,12 +1,14 @@
 using System;
 using UnityEngine;
+using Unity.Cinemachine;
 
 using UnityEngine.Events;
 
 public class InputManager : MonoBehaviour
 {
+[SerializeField] private CinemachineCamera freeLookCamera;
 public UnityEvent OnSpacePressed = new UnityEvent();
-public UnityEvent<Vector2> OnMove = new UnityEvent<Vector2>();
+public UnityEvent<Vector3> OnMove = new UnityEvent<Vector3>();
 public UnityEvent OnResetPressed = new UnityEvent();
 void Update()
 {
@@ -14,22 +16,22 @@ if (Input.GetKeyDown(KeyCode.Space))
 {
 OnSpacePressed?.Invoke();
 }
-Vector2 input = Vector2.zero;
+Vector3 input = Vector3.zero;
 if (Input.GetKey(KeyCode.A))
  {
- input += Vector2.left;
+ input += Vector3.Normalize(freeLookCamera.transform.right*-1);
  }
  if (Input.GetKey(KeyCode.D))
  {
- input += Vector2.right;
+ input += Vector3.Normalize(freeLookCamera.transform.right);
  }
 if (Input.GetKey(KeyCode.W))
  {
- input += Vector2.up;
+ input += Vector3.Normalize(freeLookCamera.transform.forward);
  }
 if (Input.GetKey(KeyCode.S))
  {
- input += Vector2.down;
+ input += Vector3.Normalize(freeLookCamera.transform.forward*-1);
  }
  OnMove?.Invoke(input);
 }
