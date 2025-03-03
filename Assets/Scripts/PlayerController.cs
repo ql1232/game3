@@ -24,7 +24,7 @@ inputManager.OnJump.AddListener(JumpPlayer);
  {
 Vector3 pos = transform.position;
 if(!Physics.CapsuleCast(transform.position,pos, 0.5F,new Vector3(0,-1,0),1, 1)){
- rb.AddForce(1.5F * direction);
+ rb.AddForce(2F * direction);
 }else{
  rb.AddForce(4 * direction);}
 }
@@ -34,7 +34,7 @@ if(!Physics.CapsuleCast(transform.position,pos, 0.5F,new Vector3(0,-1,0),1, 1)){
 	pos.y-=0.5F;
 b=Physics.CapsuleCast(transform.position,pos, 0.5F,new Vector3(0,-1,0),1, 1);
   if(b&&time==0){
-   rb.AddForce(new Vector3(0,600,0));
+   rb.AddForce(new Vector3(0,300,0));
 	time=300;
   }
 }
